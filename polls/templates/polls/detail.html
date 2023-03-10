@@ -6,9 +6,11 @@
     {% endfor %} 
 </ul> -->
 
-<form action="" method="post">
+<form method="post" action="{% url 'polls:vote' question.id  %}">
+    {% csrf_token %}
     <fieldset>
         <legend><h1>{{ question.question_text }}</h1></legend>
+
         {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>
         {% endif %}
@@ -17,5 +19,9 @@
             <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
             <label for="choice{{forloop.counter}}">{{ choice.choice_text }}</label><br>
         {% endfor %}
+
     </fieldset>
+
+    <input type="submit" value="Vote">
+
 </form>
